@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egoist.amap.dao.RoutePoiMapper">
+  <resultMap id="BaseResultMap" type="com.egoist.amap.pojo.RoutePoi">
+    <id column="idx" jdbcType="BIGINT" property="idx" />
+    <result column="poi_id" jdbcType="VARCHAR" property="poiId" />
+    <result column="poi_name" jdbcType="VARCHAR" property="poiName" />
+    <result column="poi_type" jdbcType="VARCHAR" property="poiType" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="shopinfo" jdbcType="VARCHAR" property="shopinfo" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="poi_order" jdbcType="INTEGER" property="poiOrder" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    idx, poi_id, poi_name, poi_type, address, tel, shopinfo, lng, lat, poi_order, create_time,
+    status
+  </sql>
+  <select id="selectByExample" parameterType="com.egoist.amap.pojo.RoutePoiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_route_poi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_route_poi
+    where idx = #{idx,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_route_poi
+    where idx = #{idx,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.egoist.amap.pojo.RoutePoiExample">
+    delete from tb_route_poi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.egoist.amap.pojo.RoutePoi">
+    insert into tb_route_poi (idx, poi_id, poi_name,
+    poi_type, address, tel,
+    shopinfo, lng, lat,
+    poi_order, create_time, status
+    )
+    values (#{idx,jdbcType=BIGINT}, #{poiId,jdbcType=VARCHAR}, #{poiName,jdbcType=VARCHAR},
+    #{poiType,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
+    #{shopinfo,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL},
+    #{poiOrder,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=SMALLINT}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.egoist.amap.pojo.RoutePoi">
+    insert into tb_route_poi
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        idx,
+      </if>
+      <if test="poiId != null">
+        poi_id,
+      </if>
+      <if test="poiName != null">
+        poi_name,
+      </if>
+      <if test="poiType != null">
+        poi_type,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="shopinfo != null">
+        shopinfo,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="poiOrder != null">
+        poi_order,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idx != null">
+        #{idx,jdbcType=BIGINT},
+      </if>
+      <if test="poiId != null">
+        #{poiId,jdbcType=VARCHAR},
+      </if>
+      <if test="poiName != null">
+        #{poiName,jdbcType=VARCHAR},
+      </if>
+      <if test="poiType != null">
+        #{poiType,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="shopinfo != null">
+        #{shopinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="poiOrder != null">
+        #{poiOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.egoist.amap.pojo.RoutePoiExample" resultType="java.lang.Long">
+    select count(*) from tb_route_poi
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_route_poi
+    <set>
+      <if test="record.idx != null">
+        idx = #{record.idx,jdbcType=BIGINT},
+      </if>
+      <if test="record.poiId != null">
+        poi_id = #{record.poiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poiName != null">
+        poi_name = #{record.poiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poiType != null">
+        poi_type = #{record.poiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopinfo != null">
+        shopinfo = #{record.shopinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lng != null">
+        lng = #{record.lng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lat != null">
+        lat = #{record.lat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.poiOrder != null">
+        poi_order = #{record.poiOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_route_poi
+    set idx = #{record.idx,jdbcType=BIGINT},
+    poi_id = #{record.poiId,jdbcType=VARCHAR},
+    poi_name = #{record.poiName,jdbcType=VARCHAR},
+    poi_type = #{record.poiType,jdbcType=VARCHAR},
+    address = #{record.address,jdbcType=VARCHAR},
+    tel = #{record.tel,jdbcType=VARCHAR},
+    shopinfo = #{record.shopinfo,jdbcType=VARCHAR},
+    lng = #{record.lng,jdbcType=DECIMAL},
+    lat = #{record.lat,jdbcType=DECIMAL},
+    poi_order = #{record.poiOrder,jdbcType=INTEGER},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    status = #{record.status,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.egoist.amap.pojo.RoutePoi">
+    update tb_route_poi
+    <set>
+      <if test="poiId != null">
+        poi_id = #{poiId,jdbcType=VARCHAR},
+      </if>
+      <if test="poiName != null">
+        poi_name = #{poiName,jdbcType=VARCHAR},
+      </if>
+      <if test="poiType != null">
+        poi_type = #{poiType,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="shopinfo != null">
+        shopinfo = #{shopinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null">
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="poiOrder != null">
+        poi_order = #{poiOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.egoist.amap.pojo.RoutePoi">
+    update tb_route_poi
+    set poi_id = #{poiId,jdbcType=VARCHAR},
+      poi_name = #{poiName,jdbcType=VARCHAR},
+      poi_type = #{poiType,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      shopinfo = #{shopinfo,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=DECIMAL},
+      lat = #{lat,jdbcType=DECIMAL},
+      poi_order = #{poiOrder,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=SMALLINT}
+    where idx = #{idx,jdbcType=BIGINT}
+  </update>
+</mapper>

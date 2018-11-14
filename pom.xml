@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.egoist</groupId>
+	<artifactId>my-amap-manager</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+
+	<name>my-amap-manager</name>
+	<description>高德地图后台</description>
+
+	<parent>
+		<groupId>com.egoist</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	
+	<modules>
+        <module>my-amap-manager-common</module>
+        <module>my-amap-manager-dao</module>
+        <module>my-amap-manager-pojo</module>
+        <module>my-amap-manager-service</module>
+        <module>my-amap-manager-web</module>
+	</modules>
+
+
+</project>
